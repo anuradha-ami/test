@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Login</title>
+        <script type="text/javascript">
+            //<![CDATA[            
+            
+            function validate(){
+                var v_username=$("#username").val();
+                var v_pwd=$("#pwd").val();
+                if(v_username==""||v_username==null||v_pwd==""||v_pwd==null){
+                    PF('info_dialog').show();
+                    return false;
+                } 
+                return true;
+            }
+            //]]>
+        </script>
+    </h:head>
+    <h:body>
+        <h:form id="form1" prependId="false">
+            <div  align="center" style="margin-top: 200px">
+                <table>
+                    <tr>
+                        <td>
+                            <p:panel id="pnl_login">
+                                <table cellpadding="8" style="margin-top: 20px;margin-bottom: 50px;margin-left: 50px;margin-right: 50px;">
+                                    <tr>
+                                        <td style="font-weight: bold">User Name:</td>
+                                        <td>
+                                            <p:inputText size="35"
+                                                         id="username"
+                                                         value="#{Login.username}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold">Password:</td>
+                                        <td>
+                                            <p:password size="35"
+                                                        value="#{Login.password}"
+                                                        id="pwd"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td/>
+                                        <td>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td><p:commandButton id="btn_login"
+                                                                         value="Sign in"
+                                                                         icon="ui-icon-key"
+                                                                         update="growl1"
+                                                                         onclick="if(!validate()){return false;}"
+                                                                         action="#{Login.login}"/>
+                                                    </td>
+                                                    <td align="right">
+                                                        <p:commandLink value="Forgot Password?"
+                                                                       style="text-align: right"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </p:panel>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <p:growl id="growl1" sticky="true" showDetail="true" life="3000" />
+            <p:dialog header="Information" widgetVar="info_dialog" modal="true" height="40" width="350" showEffect="slide"
+                      hideEffect="explode">
+                <div style="white-space: nowrap">User Name/Password cannot be blank</div>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

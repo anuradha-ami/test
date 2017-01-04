@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>        
+        <title>test</title>      
+         <f:facet name="first">        
+            <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+            
+            <script type="text/javascript">
+                var previous_ou;
+            </script>
+        </f:facet>      
+        
+        <ui:insert name="head"></ui:insert>
+    </h:head>   
+    <h:body>       
+        <f:view contentType="text/html">
+            <div class="container" align="center">
+                <center>
+                    <div width="100%"  align="center">
+                        <div id="top">
+                            <h:form prependId="false" id="template_form_header">
+                                <table border="0" width="100%"
+                                       class="page-header"
+                                       cellpadding="0" cellspacing="0"  >
+                                    <tbody>
+                                        <tr>
+                                            <td align="left" width="170px">
+
+                                             
+                                            </td>
+                                            <td align="left">
+
+                                                <div style="margin-top:0px;white-space:nowrap;">
+                                                
+
+                                                </div>
+
+                                            </td>
+                                            <td align="right">
+                                                
+                                            </td>
+                                            <td width="2%"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>                            
+                            </h:form>       
+                            <div align="left" id="menubar_container">
+                                <h:form  id="template_form_menubar" >
+                                    <p:menubar id="system_menubar" model="#{template.menuModel}"/>
+                                    <script type="text/javascript">
+                                        $('#menubar_container').find('li').addClass('ui-state-default');
+                                        $('#menubar_container').find('.ui-menubar').addClass('ui-widget-header');
+                                    </script>
+                                    <p:calendar style="display:none" id="cal1"/>
+
+                                </h:form>
+                                <h:form id="utility_form" prependId="false">
+                                    <script type="text/javascript">
+                                        var pis_trans_succeed=false;
+                                    </script>
+                                    
+                                    <p:ajaxStatus onstart="statusDialog.show();" onsuccess="pis_trans_succeed=true;statusDialog.hide();"
+                                                  onerror="pis_trans_succeed=false;statusDialog.hide();ShowConnectionError('GeneralDialog');return false;"/>  
+                                    <p:dialog modal="true" widgetVar="statusDialog" header="Status"   
+                                              draggable="false" closable="false"
+                                              resizable="false">  
+                                        <p:graphicImage value="#{GlobalResources.rsc_img_loading_bar}" />  
+                                    </p:dialog>  
+                                    <div class="template-jumpto"> 
+                                        <p:commandButton id="btn_template_system_list" 
+                                                         value="Systems List" 
+                                                         type="button"                                                           
+                                                         icon="ui-icon-triangle-1-s" 
+                                                         iconPos="right"/> 
+                                        <p:overlayPanel  styleClass="system-list-overlay" for="btn_template_system_list" hideEffect="fade"> 
+                                            <h:outputText escape="false" value="systemListHtml"/> 
+                                            <script type="text/javascript"> 
+                                                $('.template-jumpto .system-list a').hover(function(){$(this).addClass('ui-state-default');$(this).css('border','none');},function(){$(this).removeClass('ui-state-default')});                 
+                                            </script> 
+
+                                        </p:overlayPanel> 
+                                    </div> 
+
+                                </h:form>
+                            </div>                            
+
+                        </div>
+                    </div>
+                    <div class="page-content" align="left">             
+                        <ui:insert name="content">Contents</ui:insert>
+                    </div>
+                    <div class="footer-gap"></div>
+                </center>
+            </div>
+            <div class="footer" align="center" >
+                <table border="0" class="footer-table ui-widget-header" cellpadding="0px" cellspacing="0px" style="font-weight: normal;font-size: 11px">
+                    <tbody >
+                        <tr  align="center">
+                            <td align="center" valign="middle" >
+                                <div >
+                                    <p class="footer-note">
+                                        note</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </f:view>
+    </h:body>
+</html>
